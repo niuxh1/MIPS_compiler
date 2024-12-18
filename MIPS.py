@@ -187,9 +187,7 @@ translator = MIPS()
 binary_code = translator.assemble(program)
 program = program.strip()
 program = program.split('\n')
-i = 0
-for binary_code_line in binary_code:
-    print("原指令：", program[i])
-    print("2进制指令：", binary_code_line)
-    print("16进制指令:", hex(int(binary_code_line, 2)))
-    i += 1
+file_path = "test_instructions.txt"
+with open(file_path, "w") as file:
+    for line in binary_code:
+        file.write(line + "\n")
