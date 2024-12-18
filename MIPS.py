@@ -51,7 +51,8 @@ class MIPS:
         return format(num, f'0{bits}b')
 
     def parse_R(self, instruction):
-        if not (instruction.split(',')[0] == 'jr' or instruction.split(',')[0] == 'sll' or instruction.split(',')[0] == 'srl'):
+        if not (instruction.split(',')[0] == 'jr' or instruction.split(',')[0] == 'sll' or instruction.split(',')[
+            0] == 'srl'):
 
             parts = instruction.split(',')
             opcode = self.opcodes[parts[0]]
@@ -102,7 +103,7 @@ class MIPS:
             rs = self.registers[parts[1]]
             rt = '00000'
             imm = int(parts[2])
-            return opcode + self.to_bin(rs, 5) +rt + self.to_bin(imm, 16)
+            return opcode + self.to_bin(rs, 5) + rt + self.to_bin(imm, 16)
 
     def parse_J(self, instruction):
         parts = instruction.split(',')
@@ -190,4 +191,8 @@ program = program.split('\n')
 file_path = "test_instructions.txt"
 with open(file_path, "w") as file:
     for line in binary_code:
-        file.write(line + "\n")
+        format_line = ""
+        for i in range(0, len(line), 8):
+            format_line += line[i:i + 8] + " "
+        format_line=format_line.strip()
+        file.write(format_line+"\n")
